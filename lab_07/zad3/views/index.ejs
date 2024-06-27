@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guest Book</title>
+  </head>
+  <body>
+    <h1>Guest Book</h1>
+    <div>
+      <% posts.forEach(post => {
+        %>
+        <div style="border: grey solid 1px; padding: 0 10px 10px;">
+          <h2><%= post["full-name"] %></h2>
+          <span><%= post.message %></span>
+        </div>
+      <% })
+      %>
+    </div>
+    <form method="POST" action="/">
+      <legend><h4>New post:</h4></legend>
+      <div
+        style="
+          margin-left: 10px;
+          display: flex;
+          flex-direction: column;
+          width: 200px;
+        "
+      >
+        <label for="full-name">Give your full name</label>
+        <input
+          name="full-name"
+          placeholder="John Smith"
+          style="margin-bottom: 10px"
+        />
+        <label for="message">Post message</label>
+        <textarea
+          name="message"
+          placeholder="Did anyone have problem with ...?"
+          style="margin-bottom: 10px"
+        ></textarea>
+        <div style="display: flex; justify-content: space-around">
+          <input type="submit" />
+          <input type="reset" />
+        </div>
+      </div>
+    </form>
+  </body>
+</html>

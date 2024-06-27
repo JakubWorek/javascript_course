@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin=""></script>
+        <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin=""></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <title>zad_03 - react</title>
+    </head>
+    <body>
+        <div id="root"></div>
+        <form onsubmit="event.preventDefault();">
+          <h2>requestAnimationFrame()</h2>
+          <label for="counter">Counter→</label>
+          <output id="counter" style="font-size: 4vh; color: red;">0</output>
+          <br>
+          <button id="start" onclick="startAnimation()">Start</button>
+          <button id="stop" disabled onclick="stopAnimation()">Stop</button>
+          <!-- ************************************************************** -->
+          <hr>
+          <h2>Time-consuming calculations — version 1</h2>
+          <label for="result_main">Result:</label>
+          <output id="result_main">0</output>
+          <br>
+          <label for="iterations_main">Number of iterations:</label>
+          <input id="iterations_main" type="text" value="50">
+          <button onclick="document.forms[0].result_main.value = calculatePrimes()">Run calculations</button>
+          <!-- ************************************************************** -->
+          <h2>Time-consuming calculations — version 2</h2>
+          <label for="result_worker">Result:</label>
+          <output id="result_worker">0</output>
+          <br>
+          <label for="iterations_worker">Number of iterations:</label>
+          <input id="iterations_worker" type="text" value="50">
+          <button onclick="calculatePrimesWorker()">Run calculations</button>
+        </form>
+
+        <script>
+          const worker = new Worker('worker.js')
+
+          var animation;
+          var i = 0;
+
+          worker.onmessage = res => {
+              document.forms[0].result_worker.value = res.data;
+          };
+
+          const calculatePrimesWorker = () => {
+              worker.postMessage(document.forms[0].iterations_worker.value || 50);
+          };
+
+          function calculatePrimes() {
+              const iterations = document.forms[0].iterations_main.value || 50;
+              // Source: https://udn.realityripple.com/docs/Tools/Performance/Scenarios/Intensive_JavaScript
+              var primes = [];
+              for (var i = 0; i < iterations; i++) {
+              var candidate = i * (1000000000 * Math.random());
+              var isPrime = true;
+              for (var c = 2; c <= Math.sqrt(candidate); ++c) {
+                  if (candidate % c === 0) {
+                  // not prime
+                  isPrime = false;
+                  break;
+                  }
+              }
+              if (isPrime) {
+                  primes.push(candidate);
+              }
+              }
+              return primes;
+          }
+
+          function startAnimation() {
+              document.forms[0].start.disabled = true;
+              document.forms[0].stop.disabled = false;
+              animation = window.requestAnimationFrame(step);
+          }
+          function step() {
+              document.forms[0].counter.value = i++;
+              animation = window.requestAnimationFrame(step);
+          }
+          function stopAnimation() {
+              document.forms[0].start.disabled = false;
+              document.forms[0].stop.disabled = true;
+              window.cancelAnimationFrame(animation)
+          }
+        </script>
+
+
+
+        <script type="text/babel">
+            class Main extends React.Component {
+                render() {
+                    return (
+                        <main>
+                            <Counter initial={0} delay={1000} />
+                            <Counter initial={0} delay={100} />
+                        </main>
+                    );
+                }
+            }
+
+            class Counter extends React.Component {
+              constructor(props) {
+                super(props);
+                this.state = { count: this.props.initial };
+                this.intervalId = null;
+              }
+
+              startCounter = () => {
+                if (this.intervalId === null) {
+                  this.intervalId = setInterval(() => {
+                    this.setState((prevState) => ({ count: prevState.count + 1 }));
+                  }, this.props.delay);
+                }
+              };
+
+              stopCounter = () => {
+                if (this.intervalId !== null) {
+                  clearInterval(this.intervalId);
+                  this.intervalId = null;
+                }
+              };
+
+              render() {
+                return (
+                  <div class='green-container'>
+                    <p>Counter→<span style={{ color: 'red' }}>{this.state.count}</span></p>
+                    <button className="btn btn-primary" onClick={this.startCounter}>Start</button>
+                    <button className="btn btn-primary" onClick={this.stopCounter}>Stop</button>
+                  </div>
+                );
+              }
+            }
+
+            const container = document.getElementById('root');
+            const root = ReactDOM.createRoot(container);
+            root.render(<Main />);
+        </script>
+    </body>
+</html>

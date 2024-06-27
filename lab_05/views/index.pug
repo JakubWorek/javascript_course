@@ -1,0 +1,27 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1')
+        title Second Express application
+    body
+        main
+            h1 Second Express application
+            form(method='POST' action='/')
+                label(for='name') Give your name
+                input(name='name')
+                br
+                input(type='submit')
+                input(type='reset')
+            img(src="http://localhost:8000/img/gospodarstwo.jpg" alt="Example picture" style="width:700px")
+            table(style="border: 2px solid lightgrey; border-collapse:collapse;width: 400px;height: 130px")
+                thead(style="border: 2px solid lightgrey;") 
+                    th Nazwisko
+                    th Imię
+                    th Wydział
+                each student in students 
+                    tr(style="border: 2px solid lightgrey;text-align:center;")
+                        td= student.lname
+                        td= student.fname
+                        if student.faculty
+                            td= student.faculty

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Plik 'zadanie1B.html'</title>
+</head>
+<body onLoad="funkcja_zwrotna()">
+    <div>Treść dokumentu HTML przed skryptem</div>
+    <script>
+        function funkcja_zwrotna() {
+            console.log('Tekst 1');
+            window.alert('Tekst 2');
+            // document.write('Tekst 3'); bo nadpisuje cały dokument
+        }
+    </script>
+    <div>Treść dokumentu HTML po skrypcie</div>
+</body>
+</html>

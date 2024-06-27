@@ -1,0 +1,91 @@
+
+:root {
+  --text-color-initial: #1d1d1d;
+  --text-color-final: #228ab9;
+}
+
+/* .my-container {
+  padding: 0.5rem;
+  background-color: #eff;
+  border: 1px solid #a8a8a8;
+  box-shadow: 0 0 6px 0 rgb(0, 0, 0, 0.4);
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+  align-items: start;
+} */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote {
+  margin: 0;
+}
+
+p {
+  margin: 1rem 0;
+}
+
+blockquote {
+  font-family: 'Consolas', monospace;
+}
+
+header {
+  grid-column: span 2;
+}
+
+nav {
+  width: 128px;
+}
+
+nav ul {
+  /* Specyfikacja wyglądu */
+}
+
+nav li {
+  /* Specyfikacja wyglądu */
+}
+
+aside {
+  grid-column: 2;
+  grid-row: span 2;
+}
+
+main {
+  /* Specyfikacja wyglądu */
+}
+
+footer {
+  grid-column: span 2;
+}
+
+@keyframes text-fade {
+  from {
+      color: var(--text-color-initial);
+  }
+  to {
+      color: var(--text-color-final);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  html {
+      font-size: 14px;
+  }
+
+  .main-container {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+  }
+
+  nav {
+      width: auto;
+  }
+}

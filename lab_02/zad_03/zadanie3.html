@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <title>Płótno</title>
+  </head>
+  <body>
+    <main>
+      <h1>Płótno</h1>
+      <canvas id="canvas" style="border:1px solid #000000;">
+      Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas" 
+      </canvas>
+    </main>
+    <script>
+      "use strict";                                       // Nie wyłączaj trybu ścisłego    
+      var canvas = document.getElementById('canvas');    // Tutaj jest użyty standard W3C DOM — będzie on tematem następnych ćwiczeń
+      console.log(canvas);
+      var ctx = canvas.getContext('2d');                      // Utworzenie obiektu 'CanvasRenderingContext2D'       
+      //ctx.fillText("Hello World", 10, canvas.height / 2); // Wykreślenie podanego tekstu na płótnie
+      for (let i = 0; i < 2; i++) {
+        for (let j=0; j < 2; j++) { 
+                ctx.fillStyle=`rgb(${Math.floor(255 - 85 * i)},${Math.floor( 255 - 85 * j )}, 0)`;
+                ctx.fillRect(j * 25, i * 25, 25, 25); 
+                ctx.strokeStyle = `rgb(0, ${Math.floor(255 - 85 * i)}, ${Math.floor(255 - 85 * j)})`;
+                ctx.beginPath();
+                ctx.arc(12.5 + j * 25, 12.5 + i * 25, 10, 0, 2 * Math.PI, true);
+                ctx.stroke();
+            }
+        }
+        ctx.fillStyle = `rgb(60, 60, 60)`;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(50, 50);
+        ctx.lineTo(0, 50);
+        ctx.fill();
+    </script>
+  </body>
+  </html>

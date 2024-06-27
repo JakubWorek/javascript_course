@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plik 'zadanie1C.html'</title>
+    <script src="zadanie2.js" defer></script>
+  </head>
+  <body>
+    <h1>Formularz</h1>
+    <form onInput="wynik.value = sum_strings([pole_tekstowe.value, pole_liczbowe.value])">
+      <input id="pole_tekstowe" type="text" placeholder="Wprowadź tekst">
+      +
+      <input id="pole_liczbowe" type="number" placeholder="Wprowadź liczbę">    
+      =
+      <output name="wynik" for="pole_tekstowe pole_liczbowe">Tu pojawi się wynik obliczeń</output>    
+      <br>    
+      <input type="button" value="Wypisz" onClick='funkcja_zwrotna()'>
+    </form>
+    <script>
+        // pierwszy argument to tekst, który zostanie wyświetlony 
+        // w oknie dialogowym, drugi argument to tekst, 
+        // który zostanie wyświetlony w polu tekstowym okna dialogowego
+        function funkcja_zwrotna(){
+          wartosc_pole_tekstowe = document.forms[0].elements[0].value;
+          wartosc_pole_liczbowe = document.forms[0].elements[1].value;
+          console.log(wartosc_pole_tekstowe + ':' + typeof(wartosc_pole_tekstowe));
+          console.log(wartosc_pole_liczbowe + ':' + typeof(wartosc_pole_liczbowe));
+        }
+    </script>
+  </body>
+</html>

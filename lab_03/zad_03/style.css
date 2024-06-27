@@ -1,0 +1,35 @@
+main {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.green-container,
+.grey-container,
+.yellow-container,
+.red-container {
+  padding: 1rem;
+  color: #242424;
+  border-radius: .5rem;
+  overflow-wrap: anywhere;
+}
+
+.green-container {
+  background-color: #6bed9b;
+}
+
+.grey-container {
+  display: flex;
+  flex-direction: column;
+  background-color: #bfbfcb;
+  gap: 1rem;
+}
+
+.yellow-container {
+  background-color: #ede06b;
+}
+
+.red-container {
+  background-color: #ed6b74;
+}

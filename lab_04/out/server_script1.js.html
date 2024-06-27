@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: server_script1.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: server_script1.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// const http = require('node:http');
+// const { URL } = require('node:url');
+import http from 'node:http';
+import { URL } from 'node:url';
+
+
+/**
+     * Handles incoming requests.
+     *
+     * @param {IncomingMessage} request - Input stream — contains data received from the browser, e.g,. encoded contents of HTML form fields.
+     * @param {ServerResponse} response - Output stream — put in it data that you want to send back to the browser.
+     * The answer sent by this stream must consist of two parts: the header and the body.
+     * &lt;ul>
+     *  &lt;li>The header contains, among others, information about the type (MIME) of data contained in the body.
+     *  &lt;li>The body contains the correct data, e.g. a form definition.
+     * &lt;/ul>
+     * @author Stanisław Polak &lt;polak@agh.edu.pl>
+*/
+
+function requestListener(request, response) {
+    console.log('--------------------------------------');
+    console.log(`The relative URL of the current request: ${request.url}`);
+    console.log(`Access method: ${request.method}`);
+    console.log('--------------------------------------');
+    // Create the URL object
+    const url = new URL(request.url, `http://${request.headers.host}`);
+    /* ************************************************** */
+    // if (!request.headers['user-agent'])
+    if (url.pathname !== '/favicon.ico')
+        // View detailed URL information
+        console.log(url);
+
+    /* *************** */
+    /* "Routes" / APIs */
+    /* *************** */
+
+    switch ([request.method, url.pathname].join(' ')) {
+        /* 
+          -------------------------------------------------------
+          Generating the form if 
+             the GET method was used to send data to the server
+          and 
+             the relative URL is '/', 
+          ------------------------------------------------------- 
+        */
+        case 'GET /':
+            /* ************************************************** */
+            // Creating an answer header — we inform the browser that the returned data is HTML
+            response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+            /* ************************************************** */
+            // Setting a response body
+            response.write(`
+&lt;!DOCTYPE html>
+&lt;html lang="en">
+  &lt;head>
+    &lt;meta charset="utf-8">
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1">
+    &lt;title>Vanilla Node.js application&lt;/title>
+  &lt;/head>
+  &lt;body>
+    &lt;main>
+      &lt;h1>Vanilla Node.js application&lt;/h1>
+      &lt;form method="GET" action="/submit">
+        &lt;label for="name">Give your name&lt;/label>
+        &lt;input name="name">
+        &lt;br>
+        &lt;input type="submit">
+        &lt;input type="reset">
+      &lt;/form>
+    &lt;/main>
+  &lt;/body>
+&lt;/html>`);
+            /* ************************************************** */
+            response.end(); // The end of the response — send it to the browser
+            break;
+            
+        /* 
+          ------------------------------------------------------
+          Processing the form content, if 
+              the GET method was used to send data to the server
+          and 
+              the relative URL is '/submit', 
+          ------------------------------------------------------
+        */
+        case 'GET /submit':
+            /* ************************************************** */
+            // Creating an answer header — we inform the browser that the returned data is plain text
+            response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+            /* ************************************************** */
+            // Place given data (here: 'Hello &lt;name>') in the body of the answer
+            response.write(`Hello ${url.searchParams.get('name')}`); // "url.searchParams.get('name')" contains the contents of the field (form) named 'name'
+            /* ************************************************** */
+            response.end(); // The end of the response — send it to the browser
+            break;
+
+        case 'POST /':
+          var body = '';
+          request.on('data', chunk => {
+            body += chunk.toString();
+          });
+          request.on('end', () => {
+            const params = new URLSearchParams(body);
+            response.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
+            response.write(`Hello ${params.get('name')}`);
+            response.end();
+          });
+        break;
+
+        /* 
+          ----------------------
+          If no route is matched 
+          ---------------------- 
+        */
+        default:
+            response.writeHead(501, { 'Content-Type': 'text/plain; charset=utf-8' });
+            response.write('Error 501: Not implemented');
+            response.end();
+    }
+}
+
+/* ************************************************** */
+/* Main block
+/* ************************************************** */
+const server = http.createServer(requestListener); // The 'requestListener' function is defined above
+server.listen(8000);
+console.log('The server was started on port 8000');
+console.log('To stop the server, press "CTRL + C"');</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-server_script2.html">server_script2</a></li></ul><h3>Externals</h3><ul><li><a href="external-IncomingMessage.html">IncomingMessage</a></li><li><a href="external-ServerResponse.html">ServerResponse</a></li></ul><h3>Global</h3><ul><li><a href="global.html#requestListener">requestListener</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Wed Apr 17 2024 15:52:28 GMT+0200 (czas środkowoeuropejski letni)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
