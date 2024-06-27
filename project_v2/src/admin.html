@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Agroturystyka "Olszyny"</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    
+<body>
+
+<div class="navbar navbar-dark background-custom d-none d-sm-block fixed-top">
+    <div class="container">
+        <div class="navbar-brand text-dark font-weight-bold">
+            <canvas id="canvas" width="35" height="35" class="mt-0">
+                Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas" 
+            </canvas>
+            <script>
+                "use strict";
+                var canvas = document.getElementById('canvas');
+                var ctx = canvas.getContext('2d');
+                for (let i = 0; i < 2; i++) {
+                  for (let j=0; j < 2; j++) { 
+                          ctx.fillStyle=`rgb(${Math.floor(255 - 85 * i)},${Math.floor( 255 - 85 * j )}, 0)`;
+                          ctx.fillRect(j * 25, i * 25, 25, 25); 
+                          ctx.strokeStyle = `rgb(0, ${Math.floor(255 - 85 * i)}, ${Math.floor(255 - 85 * j)})`;
+                          ctx.beginPath();
+                          ctx.arc(12.5 + j * 25, 12.5 + i * 25, 10, 0, 2 * Math.PI, true);
+                          ctx.stroke();
+                  }
+                }
+                ctx.fillStyle = `rgb(60, 60, 60)`;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(50, 50);
+                ctx.lineTo(0, 50);
+                ctx.fill();
+            </script>
+            <a class="text-decoration-none text-dark position-fixed mt-1 ml-2">Agroturystyka "Olszyny"</a>
+        </div>   
+        <div>
+            <button class="btn btn-outline-dark text-dark bg-light" onclick="unlog()">Wyloguj</button>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="mt-5 pt-5">     
+      <form class="d-flex justify-content-center">
+            <input id="command_console" type="text" placeholder="Wprowadź komendę" class="border-dark rounded-left background-custom pl-2 pr-2">  
+            <input id="submit" type="submit" value="Wykonaj" class="border-dark bg-dark rounded-right text-light pl-2 pr-2">
+      </form>
+      <div class="d-flex justify-content-center mt-2">
+            <button class="border-dark bg-dark rounded-left text-light pl-4 pr-4 mr-1" onclick="guests()">Guests</button>
+            <button class="border-dark bg-dark text-light pl-4 pr-4" onclick='get_guest()'>Guest</button>
+            <button class="border-dark bg-dark rounded-right text-light pl-4 pr-4 ml-1" onclick="hotel_print()">Hotel</button>
+      </div>
+      <div class="d-flex justify-content-center">
+        <button id="addroom" class=" border-dark bg-dark rounded text-light pl-4 pr-4 mt-2">ADD room</button>
+      </div>     
+</div>
+
+<style>
+    .hidden {
+        display: none;
+    }
+    .background-custom {
+        background-color: #cdd4d7;
+    }
+    .object-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .position-right {
+        display: flex;
+        justify-content: right;
+        align-items: right;
+    }
+    .center {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999;
+    }
+    .bottom-footer {
+        background-color: aliceblue;
+    }
+    .rooms {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10rem;
+    }
+    .room_image {
+        width: 10rem;
+        height: 7.5rem;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+    }
+    .btn-room {
+        width: 10rem;
+        background-color: #a9cc8e;
+        color: white;
+        border-color: #a9cc8e;
+        border-style: solid;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+
+</style>
+<script src='admin.js'></script>
+<script>
+    addEventListener('load', function () {
+        var command_console = document.getElementById('command_console');
+        var submit = document.getElementById('submit');
+        submit.addEventListener('click', function (e) {
+            e.preventDefault();
+            var command = command_console.value;
+            command_console.value = '';
+            hotel(command);
+        });
+    });
+
+    let get_guest = () => {
+        var name = window.prompt('Podaj imię');
+        var surname = window.prompt('Podaj nazwisko');
+        guest(name, surname);
+    }   
+    
+    var addroom = document.getElementById('addroom');
+    addroom.addEventListener('click', function () {
+        var number = window.prompt('Podaj numer');
+        var limit = window.prompt('Podaj rozmiar');
+        var price = window.prompt('Podaj cenę');
+        ADDroom(number, limit, price);
+        window.location.reload();
+    });
+
+</script>
+</body>
+</html>

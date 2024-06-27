@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Agroturystyka "Olszyny"</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    
+<body>
+
+<div class="navbar navbar-dark background-custom d-none d-sm-block fixed-top">
+    <div class="container">
+        <div class="navbar-brand text-dark font-weight-bold">
+            <canvas id="canvas" width="35" height="35" class="mt-0">
+                Wygląda na to, że twoja przeglądarka nie obsługuje elementu "canvas" 
+            </canvas>
+            <script>
+                "use strict";
+                var canvas = document.getElementById('canvas');
+                var ctx = canvas.getContext('2d');
+                for (let i = 0; i < 2; i++) {
+                    for (let j=0; j < 2; j++) { 
+                        ctx.fillStyle=`rgb(${Math.floor(255 - 85 * i)},${Math.floor( 255 - 85 * j )}, 0)`;
+                        ctx.fillRect(j * 25, i * 25, 25, 25); 
+                        ctx.strokeStyle = `rgb(0, ${Math.floor(255 - 85 * i)}, ${Math.floor(255 - 85 * j)})`;
+                        ctx.beginPath();
+                        ctx.arc(12.5 + j * 25, 12.5 + i * 25, 10, 0, 2 * Math.PI, true);
+                        ctx.stroke();
+                    }
+                }
+                ctx.fillStyle = `rgb(60, 60, 60)`;
+                ctx.beginPath();
+                ctx.moveTo(0, 0);
+                ctx.lineTo(50, 50);
+                ctx.lineTo(0, 50);
+                ctx.fill();
+            </script>
+            <a class="text-decoration-none text-dark position-fixed mt-1 ml-2">Agroturystyka "Olszyny"</a>
+        </div>   
+        <div class="nav-container">
+            <div class="dropdown">
+                <button class="btn background-custom dropdown-toggle" type="button" id="offerDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Oferta</button>
+                <div class="dropdown-menu" aria-labelledby="offerDropdown">
+                    <li><button class="dropdown-item">Noclegi</button></li>
+                    <li><button class="dropdown-item">Wyżywienie</button></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button class="dropdown-item">Atrakcje</button></li>
+                </div>                        
+            </div>
+            <button class="btn background-custom button">Zarezerwuj</button>
+            <div class="dropdown mr-4">
+                <button class="btn background-custom dropdown-toggle" type="button" id="loginDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</button>
+                <div class="dropdown-menu" aria-labelledby="loginDropdown">
+                    <li><input id="id" type="text" placeholder="login" class="pb-2 dropdown-item border-bottom"></li>
+                    <li><input id="passwd" type="password" placeholder="password" class="dropdown-item"></li>
+                    <li><button id="loginBTN" class="mt-2 bg-dark text-center text-light dropdown-item">Login</button></li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="navbar background-custom d-block d-sm-none pos-f-t fixed-top">
+    <div class="row center">
+        <a class="navbar-brand text-dark font-weight-bold" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" height="32" width="40" viewBox="0 0 640 512"><path d="M96 224v32V416c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V327.8c9.9 6.6 20.6 12 32 16.1V368c0 8.8 7.2 16 16 16s16-7.2 16-16V351.1c5.3 .6 10.6 .9 16 .9s10.7-.3 16-.9V368c0 8.8 7.2 16 16 16s16-7.2 16-16V343.8c11.4-4 22.1-9.4 32-16.1V416c0 17.7 14.3 32 32 32h32c17.7 0 32-14.3 32-32V256l32 32v49.5c0 9.5 2.8 18.7 8.1 26.6L530 427c8.8 13.1 23.5 21 39.3 21c22.5 0 41.9-15.9 46.3-38l20.3-101.6c2.6-13-.3-26.5-8-37.3l-3.9-5.5V184c0-13.3-10.7-24-24-24s-24 10.7-24 24v14.4l-52.9-74.1C496 86.5 452.4 64 405.9 64H272 256 192 144C77.7 64 24 117.7 24 184v54C9.4 249.8 0 267.8 0 288v17.6c0 8 6.4 14.4 14.4 14.4C46.2 320 72 294.2 72 262.4V256 224 184c0-24.3 12.1-45.8 30.5-58.9C98.3 135.9 96 147.7 96 160v64zM560 336a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zM166.6 166.6c-4.2-4.2-6.6-10-6.6-16c0-12.5 10.1-22.6 22.6-22.6H361.4c12.5 0 22.6 10.1 22.6 22.6c0 6-2.4 11.8-6.6 16l-23.4 23.4C332.2 211.8 302.7 224 272 224s-60.2-12.2-81.9-33.9l-23.4-23.4z"/></svg> Agroturystyka "Olszyny"
+        </a>
+        <nav class="navbar navbar-light background-custom">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class=" navbar-toggler-icon"></span>
+            </button>
+        </nav>
+    </div>
+    <div class="collapse" id="navbarToggleExternalContent">
+        <div class="background-custom p-4">
+            <div class="dropdown position-relative">
+                <button class="btn background-custom dropdown-toggle mb-2" type="button" data-toggle="collapse" data-target="#oferta" aria-controls="oferta" aria-expanded="false" aria-label="Toggle navigation">Oferta</button>                       
+                <div class="collapse bg-light rounded list-unstyled" id="oferta">
+                    <li><button class="dropdown-item">Noclegi</button></li>
+                    <li><button class="dropdown-item">Wyżywienie</button></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><button class="dropdown-item">Atrakcje</button></li>
+                </div>                  
+            </div>
+            <button class="btn background-custom button">Zarezerwuj</button>
+            <div class="dropdown position-relative">
+                <button class="btn background-custom dropdown-toggle mb-2" type="button" data-toggle="collapse" data-target="#login_drop" aria-controls="login_drop" aria-expanded="false" aria-label="Toggle navigation">Login</button>                       
+                <div class="collapse bg-light rounded list-unstyled" id="login_drop">
+                    <li><input id="id2" type="text" placeholder="login" class="dropdown-item border-bottom border-dark rounded-top pl-2 pr-2"></li>
+                    <li><input id="passwd2" type="password" placeholder="hasło" class="dropdown-item border-dark pl-2 pr-2"></li>
+                    <li><button id="loginBTN2" class="text-center text-light bg-dark dropdown-item rounded-bottom">Login</button></li>
+                </div>                  
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-5 pt-5">
+    <div class="col-md-4"></div>
+    <div class="col-md-4 skew-panel">
+        <div class="card">
+            <img src="https://www.bezmapy.pl/wp-content/uploads/2015/04/2614-825x465@2x.jpg" class="card-img-top" alt="Dostępne terminy">
+            <div class="card-body">
+                <h5 class="card-title">Dostępne terminy</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Miesiąc</th>
+                            <th scope="col">Dni</th>
+                            <tr>
+                                <td>VII</td>
+                                <td>14-21,30-31</td>
+                            </tr>
+                            <tr>
+                                <td>VIII</td>
+                                <td>1-12</td>
+                            </tr>
+                        </tr>
+                    </thead>
+                </table>
+                <button class="btn btn-primary">Zarezerwuj</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+<div class="row">
+    <div class="card col-md-4">
+        <img src="https://www.oborniki.pl/wp-content/uploads/2011/05/Agroturystyka-019-884x317.jpg" class="card-img-top" alt="Ceny Noclegu">
+        <div class="card-body">
+            <h5 class="card-title">Ceny Noclegu</h5>
+            <ul>
+                <li>Pokój 1-osobowy — 100zł.</li>
+                <li>Pokój 2-osobowy — 90zł.</li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+    <div class="card col-md-4">
+        <img src="https://www.oborniki.pl/wp-content/gallery/sycyn-pod-lipa/dsc_0365.jpg" class="card-img-top" alt="Adres">
+        <div class="card-body">
+            <h5 class="card-title">Adres</h5>
+            <p>Olszyny 1007<br>32-831 Olszyny</p>
+        </div>
+    </div>
+</div>
+
+<div id="rooms" class="rooms"></div>
+
+<footer>
+    <div class="background-custom">
+        <p class=" text-center mb-0 mr-2">@Jakub Worek</p>
+    </div>
+    <div class="bottom-footer">
+        <a class="ml-5" href="#">+48 144 144 144</a>
+        <a class="ml-5" href="#">olszyny@tarnow.pl</a>
+    </div>
+</footer>
+
+<style>
+    @keyframes skewAnimation {
+        0% {
+            transform: skewY(20deg);
+        }
+        50% {
+            transform: skewY(0deg);
+        }
+        100% {
+            transform: skewY(-20deg);
+        }
+    }
+    .skew-panel {
+        animation: skewAnimation 4s infinite alternate;
+    }
+    .background-custom {
+        background-color: #cdd4d7;
+    }
+    .object-center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .position-right {
+        display: flex;
+        justify-content: right;
+        align-items: right;
+    }
+    .center {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        z-index: 9999;
+    }
+    .bottom-footer {
+        background-color: aliceblue;
+    }
+    .rooms {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10rem;
+    }
+    .room_image {
+        width: 20rem;
+        height: 12.5rem;
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+    }
+    .btn-room {
+        width: 20rem;
+        background-color: #a9cc8e;
+        color: white;
+        border-color: #a9cc8e;
+        border-style: solid;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    .btn-room-full {
+        width: 20rem;
+        background-color: #cdd4d7;
+        color: white;
+        border-color: #cdd4d7;
+        border-style: solid;
+        border-bottom-right-radius: 8px;
+        border-bottom-left-radius: 8px;
+    }
+    .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }   
+</style>
+<script src='hotel10.js'></script>
+<script>
+    addEventListener('load', function () {
+        const id = document.getElementById('id');
+        const passwd = document.getElementById('passwd');
+        const loginBTN = document.getElementById('loginBTN');
+        loginBTN.addEventListener('click', function (e) {
+            e.preventDefault();
+            const loginDATA = id.value;
+            const passwordDATA = passwd.value;
+            id.value = '';
+            passwd.value = '';
+            console.log(loginDATA, passwordDATA);
+            login(loginDATA, passwordDATA);
+        });
+    });
+
+    let get_guest = () => {
+        var name = window.prompt('Podaj imię');
+        var surname = window.prompt('Podaj nazwisko');
+        guest(name, surname);
+    }            
+    window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY;
+        var windowHeight = window.innerHeight;
+        var documentHeight = document.body.scrollHeight;
+
+        if (scrollTop + windowHeight >= documentHeight) {
+            document.querySelector('.bottom-footer').style.display = 'block';
+        } else {
+            document.querySelector('.bottom-footer').style.display = 'none';
+        }
+    });
+    
+</script>
+</body>
+</html>

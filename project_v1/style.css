@@ -1,0 +1,48 @@
+.animate {
+  animation: card-anim 5s infinite alternate;
+}
+
+@keyframes card-anim {
+  0% {
+      transform: rotateX(0) rotateY(0) rotateZ(0);
+  }
+
+  50% {
+      transform: rotateX(30deg) rotateY(30deg) rotateZ(30deg);
+  }
+
+  100% {
+      transform: rotateX(-30deg) rotateY(-30deg) rotateZ(-30deg);
+  }
+}
+
+.rooms {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10rem;
+}
+.room_image {
+  width: 25rem;
+  height: 15rem;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.btn-room {
+  width: 25rem;
+  background-color: #a9cc8e;
+  color: white;
+  border-color: #a9cc8e;
+  border-style: solid;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.btn-room-full {
+  width: 25rem;
+  background-color: #cdd4d7;
+  color: white;
+  border-color: #cdd4d7;
+  border-style: solid;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}   
